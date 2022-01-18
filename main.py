@@ -1,6 +1,6 @@
 from typing import Optional
 
-
+# import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -66,3 +66,7 @@ def create_new_blog(blog: Blog):
         'body': blog.body,
         'published_at': blog.published_at,
     }
+
+
+# if __name__ == '__main__':
+#     uvicorn.run(app, host='127.0.0.1', port=8080)

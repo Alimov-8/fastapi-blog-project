@@ -1,5 +1,8 @@
-from fastapi import FastAPI
 from typing import Optional
+
+
+from fastapi import FastAPI
+from pydantic import BaseModel
 
 
 app = FastAPI()
@@ -32,19 +35,34 @@ def get_unpublished_blogs_list():
     }
 
 
-@app.get('/blogs/{blog_id}')
-def show_blog_info(blog_id: int):
+@app.get('/blogs/{id}')
+def show_blog_info(id: int):
     # fetch blog with id = id
     return {
-        'data': blog_id
+        'data': id
     }
 
 
 @app.get('/blogs/{blog_id}/comments')
-def show_comments_of_blog(blog_id):
+def show_comments_of_blog(id: int):
     return {
         'data': {
-            'blog_id': blog_id,
+            'blog_id': id,
             'comments': ['1', '2'],
         }
+    }
+
+
+class Blog(BaseModel):
+    title: str
+    body: str
+    published_at: Optional[bool]
+
+
+@app.post('/blogs/create', response_model=Blog)
+def create_new_blog(blog: Blog):
+    return {
+        'title': blog.title,
+        'body': blog.body,
+        'published_at': blog.published_at,
     }

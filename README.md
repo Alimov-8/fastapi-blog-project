@@ -12,12 +12,18 @@ Developing Blog API system to understand development process of FastAPI projects
 - POST operation and Request body
 
 ---
+
 - FastAPI Database connection
 - [SQL (Relational) Databases](https://fastapi.tiangolo.com/tutorial/sql-databases/)
 - [SQL Alchemy](https://www.sqlalchemy.org/)
 - Creating Database models and schemas
 - Storing data to the Database
 - Getting data from the Database
+
+---
+
+- Response status codes
+- HttpExceptions 
 
 ### Dependencies
 - python (3.6 or greater)

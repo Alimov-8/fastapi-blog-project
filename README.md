@@ -19,11 +19,14 @@ Developing Blog API system to understand development process of FastAPI projects
 - Creating Database models and schemas
 - Storing data to the Database
 - Getting data from the Database
+- Deleting data from the Database
+- CRUD functionalities 
 
 ---
 
 - Response status codes
-- HttpExceptions 
+- HttpExceptions
+- Response Models
 
 ### Dependencies
 - python (3.6 or greater)

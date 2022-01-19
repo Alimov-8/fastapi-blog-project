@@ -1,4 +1,4 @@
-# FastAPI Blog API system
+# Blog API system with FastAPI
 
 ### Overview 
 Learning FastAPI with [Offical Docs](https://fastapi.tiangolo.com/tutorial/). 
@@ -9,7 +9,7 @@ Developing Blog API system to understand development process of FastAPI projects
 - Installation and Setup FastAPI
 - Terminology of FastAPI (operation, path, decorator, function)
 - Path and Query Parameters and Validation
-- Pydantic models
+- Pydantic models, schemas
 - POST operation and Request body
 
 

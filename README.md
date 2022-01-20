@@ -34,6 +34,8 @@ Developing Blog API system to understand development process of FastAPI projects
 - Creating a User model
 - Hashing the password 
 - Metadata and Docs URLs
+- [Database Relationships](https://fastapi.tiangolo.com/tutorial/sql-databases/#create-the-relationships)
+- Foreign Keys and Relationship between User and Blog
 
 
 ### Dependencies

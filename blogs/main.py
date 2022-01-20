@@ -20,7 +20,7 @@ def get_db():
 
 @app.post('/blog/create', status_code=status.HTTP_201_CREATED, tags=["blogs"])
 def create_new_blog(request: schemas.Blog, db: Session = Depends(get_db)):
-    new_blog = models.Blog(title=request.title, body=request.body)
+    new_blog = models.Blog(title=request.title, body=request.body, creator_id=1)
     db.add(new_blog)
     db.commit()
     db.refresh(new_blog)
@@ -33,7 +33,7 @@ def read_all_blogs(db: Session = Depends(get_db)):
     return blogs
 
 
-@app.get('/blog/{id}', status_code=status.HTTP_200_OK, response_model=schemas.ShortBlog, tags=["blogs"])
+@app.get('/blog/{id}', status_code=status.HTTP_200_OK, response_model=schemas.ShortBlogInfo, tags=["blogs"])
 def read_blog(id: int, response: Response, db: Session = Depends(get_db)):
     blog = db.query(models.Blog).filter(models.Blog.id == id).first()
     if blog:
@@ -60,19 +60,17 @@ def update_blog(id: int, request: schemas.Blog, db: Session = Depends(get_db)):
                         detail=f"Blog with the id {id} is not available")
 
 
-@app.delete('/blog/{id}', status_code=status.HTTP_204_NO_CONTENT, tags=["blogs"])
+@app.delete('/blog/{id}', tags=["blogs"])
 def delete_blog(id: int, db: Session = Depends(get_db)):
     blog = db.query(models.Blog).filter(models.Blog.id == id)
 
     if not blog.first():
-        blog.delete(synchronize_session=False)
-        db.commit()
-        return {
-            "detail": "Successfully deleted"
-        }
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"Blog with id {id} not found")
 
-    raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                        detail=f"Blog with the id {id} is not available")
+    blog.delete(synchronize_session=False)
+    db.commit()
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
 @app.post('/user', response_model=schemas.UserInfo, tags=["users"])

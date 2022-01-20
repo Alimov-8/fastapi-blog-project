@@ -29,6 +29,11 @@ Developing Blog API system to understand development process of FastAPI projects
 - Response models and pydantic schemas
 - Pydantic [offical docs](https://pydantic-docs.helpmanual.io/)
 
+---
+
+- Creating a User model
+- 
+
 ### Dependencies
 - python (3.6 or greater)
 

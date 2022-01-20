@@ -4,7 +4,7 @@
 Learning FastAPI with [Offical Docs](https://fastapi.tiangolo.com/tutorial/). 
 Developing Blog API system to understand development process of FastAPI projects
 
-### Topics and Development History
+### Topics and Development Process
 - Installation and Setup FastAPI
 - Terminology of FastAPI (operation, path, decorator, function)
 - Path and Query Parameters and Validation
@@ -26,7 +26,8 @@ Developing Blog API system to understand development process of FastAPI projects
 
 - Response status codes
 - HttpExceptions
-- Response Models
+- Response models and pydantic schemas
+- Pydantic [offical docs](https://pydantic-docs.helpmanual.io/)
 
 ### Dependencies
 - python (3.6 or greater)

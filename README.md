@@ -32,7 +32,7 @@ Developing Blog API system to understand development process of FastAPI projects
 ---
 
 - Creating a User model
-- 
+- Hashing the password
 
 ### Dependencies
 - python (3.6 or greater)

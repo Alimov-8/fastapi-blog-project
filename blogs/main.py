@@ -2,9 +2,8 @@ from fastapi import FastAPI, Depends, Response, status, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 
-from . import schemas, models
+from . import schemas, models, hashing
 from .database import engine, SessionLocal
-
 
 app = FastAPI()
 
@@ -78,7 +77,7 @@ def delete_blog(id: int, db: Session = Depends(get_db)):
 
 @app.post('/user')
 def create_user(request: schemas.User, db: Session = Depends(get_db)):
-    new_user = models.User(name=request.name, email=request.email, password=request.password)
+    new_user = models.User(name=request.name, email=request.email, password=hashing.bcrypt(request.password))
     db.add(new_user)
     db.commit()
     db.refresh(new_user)

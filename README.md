@@ -32,7 +32,9 @@ Developing Blog API system to understand development process of FastAPI projects
 ---
 
 - Creating a User model
-- Hashing the password
+- Hashing the password 
+- Metadata and Docs URLs
+
 
 ### Dependencies
 - python (3.6 or greater)
@@ -50,3 +52,9 @@ Developing Blog API system to understand development process of FastAPI projects
 
 ### Run 
     $ uvicorn main:app --reload
+
+
+
+### Docs
+
+<img src="sources/photo_2022-01-20_13-09-32.jpg" alt="" style="float: left; margin-top: 5px; margin: 10px;" />

@@ -27,3 +27,11 @@ class User(BaseModel):
     name: str
     email: str
     password: str
+
+
+class UserInfo(BaseModel):
+    name: str
+    email: str
+
+    class Config:
+        orm_mode = True

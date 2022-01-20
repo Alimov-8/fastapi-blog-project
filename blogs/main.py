@@ -5,7 +5,7 @@ from typing import List
 from . import schemas, models, hashing
 from .database import engine, SessionLocal
 
-app = FastAPI()
+app = FastAPI(title="Blog API")
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -18,7 +18,7 @@ def get_db():
         db.close()
 
 
-@app.post('/blog/create', status_code=status.HTTP_201_CREATED)
+@app.post('/blog/create', status_code=status.HTTP_201_CREATED, tags=["blogs"])
 def create_new_blog(request: schemas.Blog, db: Session = Depends(get_db)):
     new_blog = models.Blog(title=request.title, body=request.body)
     db.add(new_blog)
@@ -27,13 +27,13 @@ def create_new_blog(request: schemas.Blog, db: Session = Depends(get_db)):
     return new_blog
 
 
-@app.get('/blogs', response_model=List[schemas.BlogInfo])
+@app.get('/blogs', response_model=List[schemas.BlogInfo], tags=["blogs"])
 def read_all_blogs(db: Session = Depends(get_db)):
     blogs = db.query(models.Blog).all()
     return blogs
 
 
-@app.get('/blog/{id}', status_code=status.HTTP_200_OK, response_model=schemas.ShortBlog)
+@app.get('/blog/{id}', status_code=status.HTTP_200_OK, response_model=schemas.ShortBlog, tags=["blogs"])
 def read_blog(id: int, response: Response, db: Session = Depends(get_db)):
     blog = db.query(models.Blog).filter(models.Blog.id == id).first()
     if blog:
@@ -45,7 +45,7 @@ def read_blog(id: int, response: Response, db: Session = Depends(get_db)):
     }
 
 
-@app.put('/blog/{id}', status_code=status.HTTP_202_ACCEPTED)
+@app.put('/blog/{id}', status_code=status.HTTP_202_ACCEPTED, tags=["blogs"])
 def update_blog(id: int, request: schemas.Blog, db: Session = Depends(get_db)):
     blog = db.query(models.Blog).filter(models.Blog.id == id)
 
@@ -60,11 +60,11 @@ def update_blog(id: int, request: schemas.Blog, db: Session = Depends(get_db)):
                         detail=f"Blog with the id {id} is not available")
 
 
-@app.delete('/blog/{id}', status_code=status.HTTP_204_NO_CONTENT)
+@app.delete('/blog/{id}', status_code=status.HTTP_204_NO_CONTENT, tags=["blogs"])
 def delete_blog(id: int, db: Session = Depends(get_db)):
     blog = db.query(models.Blog).filter(models.Blog.id == id)
 
-    if blog.first():
+    if not blog.first():
         blog.delete(synchronize_session=False)
         db.commit()
         return {
@@ -75,10 +75,21 @@ def delete_blog(id: int, db: Session = Depends(get_db)):
                         detail=f"Blog with the id {id} is not available")
 
 
-@app.post('/user')
+@app.post('/user', response_model=schemas.UserInfo, tags=["users"])
 def create_user(request: schemas.User, db: Session = Depends(get_db)):
     new_user = models.User(name=request.name, email=request.email, password=hashing.bcrypt(request.password))
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
     return new_user
+
+
+@app.get('/user/{id}', response_model=schemas.UserInfo, tags=["users"])
+def get_user(id: int, db: Session = Depends(get_db)):
+    user = db.query(models.User).filter(models.User.id == id).first()
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail=f"User with the id {id} is not available")
+
+    return user
+

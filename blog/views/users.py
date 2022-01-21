@@ -4,7 +4,9 @@ from blog import models, hashing
 
 
 def create(db, request):
-    new_user = models.User(name=request.name, email=request.email, password=hashing.bcrypt(request.password))
+    new_user = models.User(name=request.name,
+                           email=request.email,
+                           password=hashing.get_password_hash(request.password))
     db.add(new_user)
     db.commit()
     db.refresh(new_user)

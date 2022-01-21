@@ -44,6 +44,12 @@ Developing Blog API system to understand development process of FastAPI projects
 - API Routers
 - Blog and User views
 
+---
+- Authentication routers
+- Login and Password verify
+- Generating JWT tokens
+- [OAuth2 and JWT tokens](https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/)
+
 
 ### Dependencies
 - python (3.6 or greater)

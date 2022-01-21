@@ -37,6 +37,11 @@ Developing Blog API system to understand development process of FastAPI projects
 - [Database Relationships](https://fastapi.tiangolo.com/tutorial/sql-databases/#create-the-relationships)
 - Foreign Keys and Relationship between User and Blog
 
+---
+
+- [Bigger Application Structure](https://fastapi.tiangolo.com/tutorial/bigger-applications/)
+- Code restructuring
+- API Routers
 
 ### Dependencies
 - python (3.6 or greater)

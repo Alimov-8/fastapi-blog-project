@@ -37,3 +37,10 @@ def delete(db, blog):
     db.commit()
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
+
+def is_creator(blog, user):
+    if blog.first().creator_id != user.id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
+                            detail=f"You don't have permission to edit blog with the id {id}")
+    return True
+

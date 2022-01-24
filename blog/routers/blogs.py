@@ -32,15 +32,18 @@ def read_blog(id: int, db: Session = Depends(get_db)):
 
 
 @router.put('/{id}', status_code=status.HTTP_202_ACCEPTED)
-def update_blog(id: int, request: schemas.Blog, db: Session = Depends(get_db)):
+def update_blog(id: int, request: schemas.Blog,
+                db: Session = Depends(get_db),
+                user: schemas.User = Depends(oauth2.get_current_user)):
     blog = blogs.get_blog_or_404(db, id)
-    return blogs.update(request, db, blog)
+    if blogs.is_creator(blog, user):
+        return blogs.update(request, db, blog)
 
 
 @router.delete('/{id}')
-def delete_blog(id: int, db: Session = Depends(get_db)):
+def delete_blog(id: int,
+                db: Session = Depends(get_db),
+                user: schemas.User = Depends(oauth2.get_current_user)):
     blog = blogs.get_blog_or_404(db, id)
-    return blogs.delete(db, blog)
-
-
-
+    if blogs.is_creator(blog, user):
+        return blogs.delete(db, blog)

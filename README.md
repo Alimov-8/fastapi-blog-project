@@ -51,9 +51,9 @@ Developing Blog API system to understand development process of FastAPI projects
 - [OAuth2 and JWT tokens](https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/)
 - Environmental variables and secret keys
 - Route behind authentication
-- Allow authenticated users 
-###### Learnings
+- Allow authenticated users
 - Delete and Update only own blogs (403 Forbidden)
+###### Learnings
 - FastAPI code restructure (bigger application structure)
 - Docs and AWS EC2 deployment images
 - AWS services, Docker

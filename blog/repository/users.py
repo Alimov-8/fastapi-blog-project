@@ -1,12 +1,13 @@
 from fastapi import status, HTTPException
 
-from blog import models, hashing
+from blog import hashing
+from blog.models.users import User
 
 
 def create(db, request):
-    new_user = models.User(name=request.name,
-                           email=request.email,
-                           password=hashing.get_password_hash(request.password))
+    new_user = User(name=request.name,
+                    email=request.email,
+                    password=hashing.get_password_hash(request.password))
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
@@ -14,7 +15,7 @@ def create(db, request):
 
 
 def get_user_or_404(db, id: int):
-    user = db.query(models.User).filter(models.User.id == id)
+    user = db.query(User).filter(User.id == id)
 
     if not user.first():
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -25,7 +26,7 @@ def get_user_or_404(db, id: int):
 
 def get_user_by_email(db, email: str):
     for record in db:
-        user = record.query(models.User).filter(models.User.email == email)
+        user = record.query(User).filter(User.email == email)
         if user:
             return user
 

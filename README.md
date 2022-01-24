@@ -53,8 +53,10 @@ Developing Blog API system to understand development process of FastAPI projects
 - Route behind authentication
 - Allow authenticated users
 - Delete and Update only own blogs (403 Forbidden)
+- [FastAPI Layered Architecture](https://github.com/teamhide/fastapi-layered-architecture)
+
 ###### Learnings
-- FastAPI code restructure (bigger application structure)
+
 - Docs and AWS EC2 deployment images
 - AWS services, Docker
 - Deployment FastAPI with Docker to AWS 

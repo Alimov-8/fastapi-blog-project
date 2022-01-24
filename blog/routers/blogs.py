@@ -3,9 +3,12 @@ from typing import List
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
-from blog import schemas, oauth2
+from blog import oauth2
+from blog.repository import blogs
 from blog.database import get_db
-from blog.views import blogs
+from blog.schemas.users import UserSchema
+from blog.schemas.blogs import BlogSchema, BlogInfoSchema, ShortBlogInfoSchema
+
 
 router = APIRouter(
     prefix="/blogs",
@@ -15,26 +18,26 @@ router = APIRouter(
 
 
 @router.post('/create', status_code=status.HTTP_201_CREATED)
-def create_blog(request: schemas.Blog,
+def create_blog(request: BlogSchema,
                 db: Session = Depends(get_db),
-                user: schemas.User = Depends(oauth2.get_current_user)):
+                user: UserSchema = Depends(oauth2.get_current_user)):
     return blogs.create(request, db, user)
 
 
-@router.get('/', response_model=List[schemas.BlogInfo])
+@router.get('/', response_model=List[BlogInfoSchema])
 def read_blogs(db: Session = Depends(get_db)):
     return blogs.get_all(db)
 
 
-@router.get('/{id}', response_model=schemas.ShortBlogInfo)
+@router.get('/{id}', response_model=ShortBlogInfoSchema)
 def read_blog(id: int, db: Session = Depends(get_db)):
     return blogs.get_blog_or_404(db, id).first()
 
 
 @router.put('/{id}', status_code=status.HTTP_202_ACCEPTED)
-def update_blog(id: int, request: schemas.Blog,
+def update_blog(id: int, request: BlogSchema,
                 db: Session = Depends(get_db),
-                user: schemas.User = Depends(oauth2.get_current_user)):
+                user: UserSchema = Depends(oauth2.get_current_user)):
     blog = blogs.get_blog_or_404(db, id)
     if blogs.is_creator(blog, user):
         return blogs.update(request, db, blog)
@@ -43,7 +46,7 @@ def update_blog(id: int, request: schemas.Blog,
 @router.delete('/{id}')
 def delete_blog(id: int,
                 db: Session = Depends(get_db),
-                user: schemas.User = Depends(oauth2.get_current_user)):
+                user: UserSchema = Depends(oauth2.get_current_user)):
     blog = blogs.get_blog_or_404(db, id)
     if blogs.is_creator(blog, user):
         return blogs.delete(db, blog)

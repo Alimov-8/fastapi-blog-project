@@ -5,9 +5,9 @@ from environs import Env
 from jose import JWTError, jwt
 
 from blog.database import get_db
-from blog.schemas import TokenData
+from blog.schemas.token import TokenDataSchema
 
-from blog.views.users import get_user_by_email
+from blog.repository.users import get_user_by_email
 
 # Environmental variables
 env = Env()
@@ -36,7 +36,7 @@ def verify_token(token: str, credentials_exception):
         email: str = payload.get("sub")
         if email is None:
             raise credentials_exception
-        token_data = TokenData(email=email)
+        token_data = TokenDataSchema(email=email)
     except JWTError:
         raise credentials_exception
 

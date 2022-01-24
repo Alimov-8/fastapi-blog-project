@@ -13,7 +13,7 @@ def create(db, request):
     return new_user
 
 
-def get_user_or_404(db, id):
+def get_user_or_404(db, id: int):
     user = db.query(models.User).filter(models.User.id == id)
 
     if not user.first():
@@ -22,3 +22,11 @@ def get_user_or_404(db, id):
 
     return user
 
+
+def get_user_by_email(db, email: str):
+    for record in db:
+        user = record.query(models.User).filter(models.User.email == email)
+        if user:
+            return user
+
+    return None

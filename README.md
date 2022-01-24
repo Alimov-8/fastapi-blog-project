@@ -54,10 +54,10 @@ Developing Blog API system to understand development process of FastAPI projects
 - Allow authenticated users
 - Delete and Update only own blogs (403 Forbidden)
 - [FastAPI Layered Architecture](https://github.com/teamhide/fastapi-layered-architecture)
+- Docs and AWS EC2 deployment images
 
 ###### Learnings
-
-- Docs and AWS EC2 deployment images
+- Deployment with FastAPI docs
 - AWS services, Docker
 - Deployment FastAPI with Docker to AWS 
 - Databases PostgreSQL, MongoDB, Redis
@@ -85,4 +85,25 @@ Developing Blog API system to understand development process of FastAPI projects
 
 ### Docs
 
-<img src="sources/photo_2022-01-20_13-09-32.jpg" alt="" style="float: left; margin-top: 5px; margin: 10px;" />
+<img src="sources/image_2022-01-24_19-00-50.png" alt="" style="float: left; margin-top: 5px; margin: 10px;" />
+
+#### ---
+### Running FastAPI app with AWS EC2
+    // Prepare the EC2 with Python and Apache server
+    $ sudo apt upgrade
+    $ sudo apt install apache2  # /var/www/html/index.html
+    $ sudo service apache2 start
+    $ sudo apt install python3-pip
+    $ sudo apt install python3-venv
+    
+    // Cloning Project and Install Dependencies
+    $ git clone [project link] && cd [project]
+    $ python3 -m venv env
+    $ source env/bin/activate
+    $ pip install -r requirements.txt
+    
+    // Runing app
+    $ uvicorn main:app --reload  # Run from main.py folder
+    
+<img src="sources/photo_2022-01-20_21-55-40.jpg" alt="" style="float: left; margin-top: 5px; margin: 10px;" />
+<img src="sources/photo_2022-01-20_22-11-31.jpg" alt="" style="float: left; margin-top: 5px; margin: 10px;" />

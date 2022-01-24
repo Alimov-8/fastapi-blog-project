@@ -47,9 +47,10 @@ Developing Blog API system to understand development process of FastAPI projects
 ---
 - Authentication routers
 - Login and Password verify
-###### Learnings
 - Generating JWT tokens
 - [OAuth2 and JWT tokens](https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/)
+- Environmental variables and secret keys
+###### Learnings
 - Route behind authentication
 - FastAPI code restructure (bigger application structure)
 - AWS EC2 deployment images

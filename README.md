@@ -55,9 +55,9 @@ Developing Blog API system to understand development process of FastAPI projects
 - Delete and Update only own blogs (403 Forbidden)
 - [FastAPI Layered Architecture](https://github.com/teamhide/fastapi-layered-architecture)
 - Docs and AWS EC2 deployment images
+- Deployment with FastAPI docs
 
 ###### Learnings
-- Deployment with FastAPI docs
 - AWS services, Docker
 - Deployment FastAPI with Docker to AWS 
 - Databases PostgreSQL, MongoDB, Redis

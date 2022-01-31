@@ -1,7 +1,7 @@
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 
-from blog.token import verify_token
+from .token import verify_token
 
 
 # Url from where fastapi fetch token

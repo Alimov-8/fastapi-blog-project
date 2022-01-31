@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from blog.schemas.users import ShortUserInfoSchema
+from ..schemas.users import ShortUserInfoSchema
 
 
 class BlogBaseSchema(BaseModel):

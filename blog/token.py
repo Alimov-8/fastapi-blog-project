@@ -4,10 +4,10 @@ from typing import Optional
 from environs import Env
 from jose import JWTError, jwt
 
-from blog.database import get_db
-from blog.schemas.token import TokenDataSchema
+from .database import get_db
+from .schemas.token import TokenDataSchema
 
-from blog.repository.users import get_user_by_email
+from .repository.users import get_user_by_email
 
 # Environmental variables
 env = Env()

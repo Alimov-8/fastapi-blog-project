@@ -1,7 +1,7 @@
 from fastapi import status, HTTPException
 
-from blog import hashing
-from blog.models.users import User
+from .. import hashing
+from ..models.users import User
 
 
 def create(db, request):

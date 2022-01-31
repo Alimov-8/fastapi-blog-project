@@ -1,6 +1,6 @@
 from fastapi import Response, status, HTTPException
 
-from blog.models.blogs import Blog
+from ..models.blogs import Blog
 
 
 def get_all(db):

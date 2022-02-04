@@ -1,8 +1,10 @@
 # Blog API system with FastAPI
 
+
 ### Overview 
 Learning FastAPI with [Offical Docs](https://fastapi.tiangolo.com/tutorial/). 
 Developing Blog API system to understand development process of FastAPI projects
+
 
 ### Topics and Development Process
 - Installation and Setup FastAPI
@@ -10,9 +12,7 @@ Developing Blog API system to understand development process of FastAPI projects
 - Path and Query Parameters and Validation
 - Pydantic models, schemas
 - POST operation and Request body
-
 ---
-
 - FastAPI Database connection
 - [SQL (Relational) Databases](https://fastapi.tiangolo.com/tutorial/sql-databases/)
 - [SQL Alchemy](https://www.sqlalchemy.org/)
@@ -20,30 +20,23 @@ Developing Blog API system to understand development process of FastAPI projects
 - Storing data to the Database
 - Getting data from the Database
 - Deleting data from the Database
-- CRUD functionalities 
-
+- CRUD functionalities
 ---
-
 - Response status codes
 - HttpExceptions
 - Response models and pydantic schemas
 - Pydantic [offical docs](https://pydantic-docs.helpmanual.io/)
-
 ---
-
 - Creating a User model
 - Hashing the password 
 - Metadata and Docs URLs
 - [Database Relationships](https://fastapi.tiangolo.com/tutorial/sql-databases/#create-the-relationships)
 - Foreign Keys and Relationship between User and Blog
-
 ---
-
 - [Bigger Application Structure](https://fastapi.tiangolo.com/tutorial/bigger-applications/)
 - Code restructuring
 - API Routers
 - Blog and User views
-
 ---
 - Authentication routers
 - Login and Password verify
@@ -56,13 +49,16 @@ Developing Blog API system to understand development process of FastAPI projects
 - [FastAPI Layered Architecture](https://github.com/teamhide/fastapi-layered-architecture)
 - Docs and AWS EC2 deployment images
 - Deployment with FastAPI docs
+- Dockerfile added [Blog Image](https://hub.docker.com/r/alimov8/blogimage)
 
-###### Learnings
-- AWS services, Docker
+
+###### Future Learnings
+- AWS services and Docker
 - Deployment FastAPI with Docker to AWS 
 - Databases PostgreSQL, MongoDB, Redis
----
-- Continue Learning ...
+- Continue Learning
+
+
 
 ### Dependencies
 - python (3.6 or greater)
@@ -78,16 +74,37 @@ Developing Blog API system to understand development process of FastAPI projects
     > venv\Scripts\activate.bat
     > pip install -r requirements.txt
 
+
 ### Run 
     $ uvicorn main:app --reload
 
 
+### Run FastAPI app with Docker
+    $ docker pull alimov8/blogimage
+    $ docker run -d --name blogcontainer -p 80:80 alimov8/blogimage
+    # Check 127.0.0.1/docs from browser
+
+    ------------------------------------------
+    
+    # Creating Dockerfile and Building Image
+    $ cd app
+    $ touch Dockerfile
+    $ docker build -t myimage .
+    $ docker images
+    
+    
+    # Commands to run, stop and check containers 
+    $ docker ps
+    $ docker stop blogcontainer
+    $ docker start blogcontainer
+
+
 
 ### Docs
-
 <img src="sources/image_2022-01-24_19-00-50.png" alt="" style="float: left; margin-top: 5px; margin: 10px;" />
+.
 
-#### ---
+
 ### Running FastAPI app with AWS EC2
     // Prepare the EC2 with Python and Apache server
     $ sudo apt upgrade

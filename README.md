@@ -80,6 +80,14 @@ Developing Blog API system to understand development process of FastAPI projects
 
 
 ### Run FastAPI app with Docker
+    # Start docker compose 
+    $ docker-compose -f docker-compose.yaml up
+    
+    # Stop docker compose
+    $ docker-compose -f docker-compose.yaml down
+
+    -----------------------------------------
+
     $ docker pull alimov8/blogimage
     $ docker run -d --name blogcontainer -p 80:80 alimov8/blogimage
     # Check 127.0.0.1/docs from browser

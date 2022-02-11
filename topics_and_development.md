@@ -1,0 +1,56 @@
+## Topics and Development Process
+
+- Installation and Setup FastAPI
+- Terminology of FastAPI (operation, path, decorator, function)
+- Path and Query Parameters and Validation
+- Pydantic models, schemas
+- POST operation and Request body
+---
+- FastAPI Database connection
+- [SQL (Relational) Databases](https://fastapi.tiangolo.com/tutorial/sql-databases/)
+- [SQL Alchemy](https://www.sqlalchemy.org/)
+- Creating Database models and schemas
+- Storing data to the Database
+- Getting data from the Database
+- Deleting data from the Database
+- CRUD functionalities
+---
+- Response status codes
+- HttpExceptions
+- Response models and pydantic schemas
+- Pydantic [offical docs](https://pydantic-docs.helpmanual.io/)
+---
+- Creating a User model
+- Hashing the password
+- Metadata and Docs URLs
+- [Database Relationships](https://fastapi.tiangolo.com/tutorial/sql-databases/#create-the-relationships)
+- Foreign Keys and Relationship between User and Blog
+---
+- [Bigger Application Structure](https://fastapi.tiangolo.com/tutorial/bigger-applications/)
+- Code restructuring
+- API Routers
+- Blog and User views
+---
+- Authentication routers
+- Login and Password verify
+- Generating JWT tokens
+- [OAuth2 and JWT tokens](https://fastapi.tiangolo.com/tutorial/security/oauth2-jwt/)
+- Environmental variables and secret keys
+- Route behind authentication
+- Allow authenticated users
+- Delete and Update only own blogs (403 Forbidden)
+- [FastAPI Layered Architecture](https://github.com/teamhide/fastapi-layered-architecture)
+- Docs and AWS EC2 deployment images
+- Deployment with FastAPI docs
+- Dockerfile added [Blog Image](https://hub.docker.com/r/alimov8/blogimage)
+---
+- AWS services (EC2, S3, ECR)
+- Dockerfile and docker-compose files added
+- Postgresql and Pgadmin connected with app
+- GraphQL with Django
+
+###### Future Learnings
+- GraphQL with FastAPI
+- Deployment FastAPI with Docker to AWS
+- Databases MongoDB, Redis
+- Continue Learning

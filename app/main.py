@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 
-
-from blog.database import engine, Base
 from blog.routers import blogs, users, auths
+from blog.database import Base, engine
 
 app = FastAPI(title="Blog API")
 

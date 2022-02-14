@@ -48,9 +48,9 @@
 - Dockerfile and docker-compose files added
 - Postgresql and Pgadmin connected with app
 - GraphQL with Django
+- GraphQL with FastAPI
 
 ###### Future Learnings
-- GraphQL with FastAPI
 - Deployment FastAPI with Docker to AWS
 - Databases MongoDB, Redis
 - Continue Learning

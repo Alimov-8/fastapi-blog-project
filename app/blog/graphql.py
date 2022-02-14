@@ -1,11 +1,24 @@
 import graphene
 
-from .models.users import User
-from . import hashing, database
+from .database import get_db
 from .schemas.users import UserModel
-from .repository.users import get_user_or_404
+from .repository import users, blogs
 
-db = database.get_db()
+db = get_db()
+
+
+class BlogRequest:
+    def __init__(self, title, body, creator_id):
+        self.title = title
+        self.body = body
+        self.id = creator_id
+
+
+class UserRequest:
+    def __init__(self, name, email, password):
+        self.name = name
+        self.email = email
+        self.password = password
 
 
 class Query(graphene.ObjectType):
@@ -18,7 +31,7 @@ class Query(graphene.ObjectType):
         return query.all()
 
     def resolve_user_by_id(self, info, id):
-        return get_user_or_404(db, id).first()
+        return users.get_user_or_404(db, id).first()
 
 
 class UserMutation(graphene.Mutation):
@@ -31,17 +44,29 @@ class UserMutation(graphene.Mutation):
 
     @classmethod
     def mutate(cls, root, info, name, email, password):
-        new_user = User(name=name,
-                        email=email,
-                        password=hashing.get_password_hash(password))
-        db.add(new_user)
-        db.commit()
-        db.refresh(new_user)
+        users.create(db, request=UserRequest(name, email, password))
         response = 'User Created Successfully!'
+        return UserMutation(response=response)
+
+
+class BlogMutation(graphene.Mutation):
+    class Arguments:
+        title = graphene.String(required=True)
+        body = graphene.String(required=True)
+        creator_id = graphene.Int(required=True)
+
+    response = graphene.String(required=True)
+
+    @classmethod
+    def mutate(cls, root, info, title, body, creator_id):
+        request = BlogRequest(title, body, creator_id)
+        blogs.create(request, db, request)
+        response = 'Blog Created Successfully!'
         return UserMutation(response=response)
 
 
 class Mutations(graphene.ObjectType):
     create_new_user = UserMutation.Field()
+    create_new_blog = BlogMutation.Field()
 
 

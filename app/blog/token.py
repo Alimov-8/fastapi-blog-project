@@ -1,21 +1,19 @@
+import os
+
 from datetime import datetime, timedelta
 from typing import Optional
-
-# from environs import Env
 from jose import JWTError, jwt
+from dotenv import load_dotenv
 
 from .database import get_db
 from .schemas.token import TokenDataSchema
-
 from .repository.users import get_user_by_email
 
-# # Environmental variables
-# env = Env()
-# env.read_env()
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv(os.path.join(BASE_DIR, '.env'))
 
-
-SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
-ALGORITHM = "HS256"
+SECRET_KEY = os.environ["SECRET_KEY"]
+ALGORITHM = os.environ["ALGORITHM"]
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 

@@ -1,5 +1,7 @@
+from graphene_sqlalchemy import SQLAlchemyObjectType
 from pydantic import BaseModel
 from typing import List
+from ..models.users import User
 
 
 class UserSchema(BaseModel):
@@ -31,3 +33,8 @@ class UserInfoSchema(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class UserModel(SQLAlchemyObjectType):
+    class Meta:
+        model = User

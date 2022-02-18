@@ -1,5 +1,6 @@
 # Pull base image
-FROM python:3.9
+#FROM python:3.9
+FROM python:3.9.6-slim-buster
 
 ENV PYTHONBUFFERED=1
 

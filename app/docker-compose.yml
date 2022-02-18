@@ -3,6 +3,17 @@
 version: '3.8'
 
 services:
+  app:
+    container_name: app
+    build: .
+    command: bash -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    volumes:
+      - .:/app
+    ports:
+      - 8000:8000
+    restart: always
+    depends_on:
+      - postgresql
 
   postgresql:
     container_name: postgresql_db
@@ -14,6 +25,7 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_NAME}
+    command: ["postgres", "-c", "log_statement=all", "-c", "log_destination=stderr"]
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
@@ -28,17 +40,38 @@ services:
     depends_on:
       - postgresql
 
-  app:
-    container_name: app
+  redis:
+    container_name: redis
+    image: redis:6.2-alpine
+    ports:
+      - 6379:6379
+
+  celery_worker:
+    container_name: celery_worker
     build: .
-    command: bash -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    command: celery -A celery_worker.celery worker --loglevel=info
     volumes:
       - .:/app
-    ports:
-        - 8000:8000
-    restart: always
+    environment:
+      - CELERY_BROKER_URL=${CELERY_BROKER_URL}
+      - CELERY_RESULT_BACKEND=${CELERY_RESULT_BACKEND}
     depends_on:
-      - postgresql
+      - app
+      - redis
+
+  flower:
+    container_name: flower
+    build: .
+    command: celery -A celery_worker.celery flower --port=5555
+    ports:
+      - 5555:5555
+    environment:
+      - CELERY_BROKER_URL=${CELERY_BROKER_URL}
+      - CELERY_RESULT_BACKEND=${CELERY_RESULT_BACKEND}
+    depends_on:
+      - app
+      - redis
+      - celery_worker
 
 volumes:
   postgres-data:

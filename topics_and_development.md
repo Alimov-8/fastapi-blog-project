@@ -49,8 +49,10 @@
 - Postgresql and Pgadmin connected with app
 - GraphQL with Django
 - GraphQL with FastAPI
+- (Celery and Redis) with Docker connected
 
 ###### Future Learnings
+- More about GraphQL, Celery, Redis
 - Deployment FastAPI with Docker to AWS
-- Databases MongoDB, Redis
+- Databases MongoDB,
 - Continue Learning
